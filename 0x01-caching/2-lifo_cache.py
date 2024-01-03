@@ -12,6 +12,7 @@ class LIFOCache(BaseCaching):
     """
     def __init__(self):
         super().__init__()
+        self.access_tracker = []
 
     def put(self, key, item):
         """
@@ -19,11 +20,14 @@ class LIFOCache(BaseCaching):
         """
         if key is None or item is None:
             return
+
+        if len(self.cache_data) >= self.MAX_ITEMS:
+            discard_key = self.access_tracker.pop(self.MAX_ITEMS - 1)
+            del self.cache_data[discard_key]
+            print(f"DISCARD: {discard_key}")
+
         self.cache_data[key] = item
-        if len(self.cache_data) > self.MAX_ITEMS:
-            discarded_key = list(self.cache_data.keys())[-1]
-            del self.cache_data[discarded_key]
-            print(f"DISCARD: {discarded_key}")
+        self.access_tracker.append(key)
 
     def get(self, key):
         """
