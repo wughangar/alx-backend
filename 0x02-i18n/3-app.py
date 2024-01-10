@@ -25,8 +25,6 @@ def get_locale():
     """ function that gets the locale"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
-babel.init_app(app, locale_selector=get_locale)
-
 
 @app.route('/')
 def index():
