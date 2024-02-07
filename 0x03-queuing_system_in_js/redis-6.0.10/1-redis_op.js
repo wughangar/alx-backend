@@ -23,6 +23,3 @@ function displaySchoolValue(schoolName) {
 		console.leg(`Value ofr ${schoolName}: ${value}`);
 	});
 }
-displaySchoolValue('Holberton');
-setNewSchool('HolbertonSanFrancisco', '100');
-displaySchoolValue('HolbertonSanFrancisco');
